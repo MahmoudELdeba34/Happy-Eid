@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
-    <meta name="theme-color" content="#fff9f2">
+    <meta name="theme-color" content="#faf6f0">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <title>عيد أضحى ٢٠٢٦ ♥ روان</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,7 +31,7 @@
         <div class="mini-player__disc" aria-hidden="true"></div>
         <div class="mini-player__info">
             <span class="mini-player__label">الآن</span>
-            <p class="mini-player__title" id="now-playing">يا ليلة العيد</p>
+            <p class="mini-player__title" id="now-playing">وأخيراً</p>
         </div>
         <div class="mini-player__btns">
             <button type="button" id="btn-prev" class="mp-btn" aria-label="السابقة">⏮</button>
@@ -41,66 +41,51 @@
     </aside>
 
     <main>
-        <!-- Hero -->
         <section class="hero">
-            <div class="hero__inner">
-                <span class="pill">٢٠٢٦ · عيد أضحى مبارك 🐑</span>
-                <h1 class="hero__title">عيد سعيد<br><em>روان</em> ♥</h1>
-                <p class="hero__lead">مفاجأة من قلب محمود — اسحبي لتحت واستمتعي</p>
+            <div class="container">
+                <div class="hero__inner">
+                    <span class="pill">٢٠٢٦ · عيد أضحى مبارك 🐑</span>
+                    <h1 class="hero__title">عيد سعيد<br><em>روان</em> ♥</h1>
+                    <p class="hero__lead">مفاجأة من قلب محمود — اسحبي لتحت واستمتعي</p>
 
-                <!-- فيديو -->
-                <div class="video-wrap reveal">
-                    <div class="video-card" id="video-card">
-                        <img class="video-poster" src="DM8A1683.jpg" alt="بوستر الفيديو" width="800" height="1000">
-                        <video
-                            id="main-video"
-                            class="video-el"
-                            playsinline
-                            webkit-playsinline
-                            preload="metadata"
-                            poster="DM8A1683.jpg"
-                        >
-                            <source src="./0424nnnnnnnnnnn.mp4" type="video/mp4">
-                        </video>
-                        <div class="video-overlay" id="video-overlay">
-                            <button type="button" class="btn-play-video" id="btn-play-video" aria-label="تشغيل الفيديو">
-                                <span class="btn-play-video__ring"></span>
-                                <span class="btn-play-video__icon">▶</span>
-                            </button>
-                            <p class="video-overlay__text">اضغطي وشوفي حكايتنا</p>
+                    <div class="yt-feature reveal">
+                        <p class="yt-feature__label">🎬 اضغطي تشغيل — أغنيتنا</p>
+                        <div class="yt-embed">
+                            <iframe
+                                src="https://www.youtube-nocookie.com/embed/GMihmMfeazY?rel=0"
+                                title="وأخيراً — محمود العسيلي"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                allowfullscreen
+                                loading="lazy"
+                            ></iframe>
                         </div>
-                        <div class="video-controls" id="video-controls">
-                            <button type="button" class="vc-btn" id="vc-toggle">⏸</button>
-                            <input type="range" class="vc-seek" id="vc-seek" min="0" max="100" value="0" aria-label="التقدم">
-                            <span class="vc-time" id="vc-time">0:00</span>
-                            <button type="button" class="vc-btn" id="vc-mute">🔊</button>
-                        </div>
-                        <p class="video-error" id="video-error" hidden>
-                            لو الفيديو مش شغال، افتحي الموقع من: <code>node server.js</code> ثم الرابط
-                        </p>
+                        <a class="yt-open" href="https://www.youtube.com/watch?v=GMihmMfeazY" target="_blank" rel="noopener noreferrer">
+                            افتحي على يوتيوب ▶
+                        </a>
                     </div>
-                    <p class="video-caption">📽 فيديونا — لحظات من قلبنا</p>
                 </div>
             </div>
         </section>
 
-        <!-- مفاجآت سريعة -->
         <section class="section section--surprises">
-            <header class="section__head reveal">
-                <span class="section__tag">مفاجآت</span>
-                <h2 class="section__title">رسائل محمود ليكِ</h2>
-                <p class="section__sub">اضغطي على كل بطاقة 💌</p>
-            </header>
-            <div class="surprise-grid" id="surprise-grid"></div>
+            <div class="container">
+                <header class="section__head reveal">
+                    <span class="section__tag">مفاجآت</span>
+                    <h2 class="section__title">رسائل محمود ليكِ</h2>
+                    <p class="section__sub">اضغطي على كل بطاقة 💌</p>
+                </header>
+                <div class="surprise-grid" id="surprise-grid"></div>
+            </div>
         </section>
 
-        <!-- صور -->
         <section class="section section--photos">
-            <header class="section__head reveal">
-                <span class="section__tag">ذكرياتنا</span>
-                <h2 class="section__title">لحظاتنا الحلوة</h2>
-                <p class="section__sub">اسحبي يمين وشمال — اضغطي للتكبير</p>
-            </header>
+            <div class="container">
+                <header class="section__head reveal">
+                    <span class="section__tag">ذكرياتنا</span>
+                    <h2 class="section__title">لحظاتنا الحلوة</h2>
+                    <p class="section__sub">اسحبي يمين وشمال — اضغطي للتكبير</p>
+                </header>
+            </div>
             <div class="gallery-scroll" id="gallery-scroll">
                 <figure class="gallery-slide reveal" data-full="DM8A1683.jpg" data-caption="نظرة تختصر الكلام">
                     <img src="DM8A1683.jpg" alt="روان ومحمود" loading="lazy">
@@ -122,82 +107,83 @@
                     <img src="DM8A1696.jpg" alt="روان ومحمود" loading="lazy">
                     <figcaption>لحظة جميلة</figcaption>
                 </figure>
-            </div>
         </section>
 
-        <!-- ألعاب -->
         <section class="section section--play">
-            <header class="section__head reveal">
-                <span class="section__tag">العبى معايا</span>
-                <h2 class="section__title">ألعاب العيد</h2>
-            </header>
+            <div class="container">
+                <header class="section__head reveal">
+                    <span class="section__tag">العبى معايا</span>
+                    <h2 class="section__title">ألعاب العيد</h2>
+                </header>
 
-            <div class="game-card reveal">
-                <h3 class="game-card__title">🎁 امسحي واكتشفي</h3>
-                <p class="game-card__hint">امسحي بالإصبع على البطاقة</p>
-                <div class="scratch-wrap">
-                    <p class="scratch-prize" id="scratch-prize">روان، إنتِ أحلى مفاجأة في حياتي — محمود ♥</p>
-                    <canvas id="scratch-canvas" class="scratch-canvas"></canvas>
-                </div>
-            </div>
-
-            <div class="game-card reveal">
-                <h3 class="game-card__title">🎡 عجلة الحب</h3>
-                <p class="game-card__hint">اضغطي لفّ — وشوفي رسالة محمود</p>
-                <div class="wheel-wrap">
-                    <div class="wheel" id="wheel">
-                        <span class="wheel__label" style="--i:0">بحبك</span>
-                        <span class="wheel__label" style="--i:1">عيدك</span>
-                        <span class="wheel__label" style="--i:2">روحي</span>
-                        <span class="wheel__label" style="--i:3">حياتي</span>
-                        <span class="wheel__label" style="--i:4">أميرتي</span>
-                        <span class="wheel__label" style="--i:5">♥</span>
+                <div class="game-card reveal">
+                    <h3 class="game-card__title">🎁 امسحي واكتشفي</h3>
+                    <p class="game-card__hint">امسحي بالإصبع على البطاقة</p>
+                    <div class="scratch-wrap">
+                        <p class="scratch-prize">روان، إنتِ أحلى مفاجأة في حياتي — محمود ♥</p>
+                        <canvas id="scratch-canvas" class="scratch-canvas"></canvas>
                     </div>
-                    <div class="wheel-pointer">▼</div>
                 </div>
-                <button type="button" class="btn-game" id="btn-spin">لفّي العجلة</button>
-                <p class="wheel-result" id="wheel-result"></p>
-            </div>
 
-            <div class="game-card reveal">
-                <h3 class="game-card__title">🃏 لعبة الذاكرة</h3>
-                <p class="game-card__hint">اقلبي الكروت وطلّعي الأزواج</p>
-                <div class="memory-grid" id="memory-grid"></div>
-                <p class="memory-score" id="memory-score">محاولات: 0</p>
+                <div class="game-card reveal">
+                    <h3 class="game-card__title">🎡 عجلة الحب</h3>
+                    <p class="game-card__hint">اضغطي لفّ — وشوفي رسالة محمود</p>
+                    <div class="wheel-wrap">
+                        <div class="wheel" id="wheel">
+                            <span class="wheel__label" style="--i:0">بحبك</span>
+                            <span class="wheel__label" style="--i:1">عيدك</span>
+                            <span class="wheel__label" style="--i:2">روحي</span>
+                            <span class="wheel__label" style="--i:3">حياتي</span>
+                            <span class="wheel__label" style="--i:4">أميرتي</span>
+                            <span class="wheel__label" style="--i:5">♥</span>
+                        </div>
+                        <div class="wheel-pointer">▼</div>
+                    </div>
+                    <button type="button" class="btn-game" id="btn-spin">لفّي العجلة</button>
+                    <p class="wheel-result" id="wheel-result"></p>
+                </div>
             </div>
         </section>
 
-        <!-- أغاني -->
         <section class="section section--music" id="music">
-            <header class="section__head reveal">
-                <span class="section__tag">🎵 ساوندتراك العيد</span>
-                <h2 class="section__title">أغاني العيد</h2>
-                <p class="section__sub">كل أغنية تفتح يوتيوب على طول</p>
-            </header>
-            <div class="tracks" id="tracks-root"></div>
+            <div class="container">
+                <header class="section__head reveal">
+                    <span class="section__tag">🎵 ساوندتراك العيد</span>
+                    <h2 class="section__title">عمرو دياب وأغاني العيد</h2>
+                    <p class="section__sub">٨ أغاني لعمرو دياب + أغاني العيد — اضغطي وتفتحي يوتيوب</p>
+                </header>
+                <div class="tracks" id="tracks-root"></div>
+            </div>
         </section>
 
-        <!-- رسالة -->
-        <section class="section section--letter">
-            <article class="letter reveal" id="letter">
-                <div class="letter__ribbon">♥</div>
-                <p class="letter__hello">أغلى <strong>روان</strong> في الدنيا،</p>
-                <p>كل عيد وأنتِ أجمل حاجة حصلتلي. مش بس عيد أضحى — ده فرحة إنك في حياتي.</p>
-                <p>أنتِ خطيبتي وحبيبتي وكل حاجة حلوة في يومي. كل عام وأنتِ عيدي — وكل يوم وأنتِ حياتي.</p>
-                <p class="letter__secret" id="letter-secret" hidden>سر صغير: أول ما شوفتكِ عرفت إن دي حكايتي ❤</p>
-                <footer class="letter__foot">
-                    <span class="letter__sign">محمود</span>
-                    <span class="letter__date">عيد الأضحى ٢٠٢٦</span>
-                </footer>
-            </article>
-            <button type="button" class="btn-final-gift reveal" id="btn-final-gift">
-                <span>🐑</span>
-                <span>اضغطي لعيدية محمود</span>
-            </button>
+        <section class="section section--letter" id="letter-section">
+            <div class="container">
+                <header class="section__head reveal">
+                    <span class="section__tag">🐑 عيدية محمود</span>
+                    <h2 class="section__title">مفاجأة خاصة</h2>
+                    <p class="section__sub gift-hint" id="gift-hint">اضغطي على الخروف عشان تفتحي الرسالة</p>
+                </header>
+
+                <button type="button" class="btn-final-gift reveal" id="btn-final-gift">
+                    <span class="btn-final-gift__emoji">🐑</span>
+                    <span>اضغطي لاستلام العيدية</span>
+                </button>
+
+                <article class="letter letter--locked" id="letter" hidden>
+                    <div class="letter__ribbon">♥</div>
+                    <p class="letter__hello">أغلى <strong>روان</strong> في الدنيا،</p>
+                    <p>كل عيد وأنتِ أجمل حاجة حصلتلي. مش بس عيد أضحى — ده فرحة إنك في حياتي.</p>
+                    <p>أنتِ خطيبتي وحبيبتي وكل حاجة حلوة في يومي. كل عام وأنتِ عيدي — وكل يوم وأنتِ حياتي.</p>
+                    <p class="letter__secret">سر صغير: أول ما شوفتكِ عرفت إن دي حكايتي ❤</p>
+                    <footer class="letter__foot">
+                        <span class="letter__sign">محمود</span>
+                        <span class="letter__date">عيد الأضحى ٢٠٢٦</span>
+                    </footer>
+                </article>
+            </div>
         </section>
     </main>
 
-    <!-- Lightbox صور -->
     <div class="lightbox" id="lightbox" hidden>
         <button type="button" class="lightbox__close" id="lightbox-close" aria-label="إغلاق">✕</button>
         <img class="lightbox__img" id="lightbox-img" src="" alt="">

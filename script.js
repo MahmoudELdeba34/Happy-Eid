@@ -1,20 +1,40 @@
 gsap.registerPlugin(ScrollTrigger);
 
-/* ═══ أغاني العيد — روابط صحيحة ═══ */
-const PLAYLIST = [
-    { id: 'EF4QVCWUSY0', title: 'يا ليلة العيد', artist: 'أم كلثوم', icon: '🌙', theme: 'classic' },
-    { id: '6mJWH3dquqE', title: 'كل عيد وانت عيدي', artist: 'عمرو دياب', icon: '🎉', theme: 'eid' },
-    { id: 'EgmXTmj62ic', title: 'تملي معاك', artist: 'عمرو دياب', icon: '✨', theme: 'amr' },
+/* ═══ أغاني العيد — روابط يوتيوب ═══ */
+const PLAYLIST_SECTIONS = [
     {
-        search: 'محمود+العسيلي+بعد+حوارات',
-        title: 'بعد حوارات',
-        artist: 'محمود العسيلي',
-        icon: '🎤',
-        theme: 'new',
+        label: 'محمود العسيلي',
+        tracks: [
+            { id: 'GMihmMfeazY', title: 'وأخيراً', artist: 'مع صابرين', icon: '🎬', theme: 'esseily' },
+        ],
     },
-    { id: 's9JVDi5la_0', title: 'إيش', artist: 'محمود العسيلي', icon: '🔥', theme: 'esseily' },
-    { id: '-jFKJ1eYJ-g', title: 'بوم طاخ', artist: 'محمود العسيلي', icon: '💥', theme: 'new' },
+    {
+        label: 'عمرو دياب',
+        tracks: [
+            { id: '6mJWH3dquqE', title: 'كل عيد وانت عيدي', artist: 'عمرو دياب', icon: '🎉', theme: 'amr' },
+            { id: 'EgmXTmj62ic', title: 'تملي معاك', artist: 'عمرو دياب', icon: '✨', theme: 'amr' },
+            { id: 'g3YyxsUBgmw', title: 'كل حياتي', artist: 'عمرو دياب', icon: '💛', theme: 'amr' },
+            { id: 'D8VEwqef9XY', title: 'أول كل حاجة', artist: 'عمرو دياب', icon: '🎵', theme: 'amr' },
+            { id: 'amy2fttDCb8', title: 'وماله', artist: 'عمرو دياب', icon: '🔥', theme: 'amr' },
+            { id: 'iMZ1skkbUWI', title: 'يوم ما اتقابلنا', artist: 'عمرو دياب', icon: '💕', theme: 'amr' },
+            { id: 'qcN8GkfaOZo', title: 'يا ساحر', artist: 'عمرو دياب', icon: '🌙', theme: 'amr' },
+            { id: 'A6H5Xx2nFvM', title: 'يتعلموا', artist: 'عمرو دياب', icon: '⭐', theme: 'amr' },
+        ],
+    },
+    {
+        label: 'أغاني العيد',
+        tracks: [
+            { id: 'T-LAJ0Y7lsw', title: 'أغنية العيد', artist: 'مفضّلة', icon: '🐑', theme: 'eid' },
+            { id: 'U25jPcPSmd8', title: 'أغنية العيد', artist: 'مفضّلة', icon: '🌙', theme: 'classic' },
+            { id: 'U1MilDXHf4M', title: 'أغنية العيد', artist: 'مفضّلة', icon: '✨', theme: 'eid' },
+            { id: 'SKfi0V8NRhQ', title: 'أغنية العيد', artist: 'مفضّلة', icon: '💛', theme: 'eid' },
+            { id: 'eUMjEOIO7Cs', title: 'أغنية العيد', artist: 'مفضّلة', icon: '🎵', theme: 'classic' },
+            { id: 'EI2oxQd95z4', title: 'أغنية العيد', artist: 'مفضّلة', icon: '❤', theme: 'eid' },
+        ],
+    },
 ];
+
+const PLAYLIST = PLAYLIST_SECTIONS.flatMap((s) => s.tracks);
 
 const SURPRISES = [
     { emoji: '💕', label: 'لمسة ١', msg: 'روان، إنتِ أجمل حاجة في يومي.' },
@@ -34,10 +54,7 @@ const WHEEL_MSGS = [
     'عيد سعيد يا حبيبتي 🐑',
 ];
 
-const youtubeUrl = (track) =>
-    track.id
-        ? `https://www.youtube.com/watch?v=${track.id}`
-        : `https://www.youtube.com/results?search_query=${track.search}`;
+const youtubeUrl = (track) => `https://www.youtube.com/watch?v=${track.id}`;
 
 let currentIndex = 0;
 const nowPlayingEl = document.getElementById('now-playing');
@@ -46,17 +63,27 @@ const btnPlay = document.getElementById('btn-play');
 const tracksRoot = document.getElementById('tracks-root');
 
 function renderTracks() {
-    tracksRoot.innerHTML = PLAYLIST.map(
-        (t, i) => `
-        <button type="button" class="track${i === 0 ? ' is-active' : ''}" data-index="${i}">
-            <span class="track__icon track__icon--${t.theme}">${t.icon}</span>
-            <span class="track__body">
-                <span class="track__name">${t.title}</span>
-                <span class="track__artist">${t.artist}</span>
-            </span>
-            <span class="track__play">▶ يوتيوب</span>
-        </button>`
-    ).join('');
+    let index = 0;
+    const parts = [];
+
+    PLAYLIST_SECTIONS.forEach((section) => {
+        parts.push(`<p class="tracks-section-label">${section.label}</p>`);
+        section.tracks.forEach((t) => {
+            const i = index;
+            parts.push(`
+            <button type="button" class="track${i === 0 ? ' is-active' : ''}" data-index="${i}">
+                <span class="track__icon track__icon--${t.theme}">${t.icon}</span>
+                <span class="track__body">
+                    <span class="track__name">${t.title}</span>
+                    <span class="track__artist">${t.artist}</span>
+                </span>
+                <span class="track__play">▶ يوتيوب</span>
+            </button>`);
+            index += 1;
+        });
+    });
+
+    tracksRoot.innerHTML = parts.join('');
 
     tracksRoot.querySelectorAll('.track').forEach((btn) => {
         btn.addEventListener('click', () => playTrack(Number(btn.dataset.index)));
@@ -114,76 +141,6 @@ function renderSurprises() {
     });
 }
 renderSurprises();
-
-/* ═══ فيديو ═══ */
-const video = document.getElementById('main-video');
-const videoCard = document.getElementById('video-card');
-const videoOverlay = document.getElementById('video-overlay');
-const btnPlayVideo = document.getElementById('btn-play-video');
-const vcToggle = document.getElementById('vc-toggle');
-const vcSeek = document.getElementById('vc-seek');
-const vcMute = document.getElementById('vc-mute');
-const vcTime = document.getElementById('vc-time');
-const videoError = document.getElementById('video-error');
-
-function fmt(sec) {
-    if (!sec || Number.isNaN(sec)) return '0:00';
-    return `${Math.floor(sec / 60)}:${Math.floor(sec % 60).toString().padStart(2, '0')}`;
-}
-
-function startVideo() {
-    video.muted = false;
-    const p = video.play();
-    if (p && p.catch) {
-        p.catch(() => {
-            video.muted = true;
-            video.play();
-        });
-    }
-    videoCard.classList.add('is-playing');
-    videoOverlay.classList.add('is-hidden');
-    vcToggle.textContent = '⏸';
-}
-
-btnPlayVideo.addEventListener('click', startVideo);
-
-vcToggle.addEventListener('click', () => {
-    if (video.paused) startVideo();
-    else {
-        video.pause();
-        videoCard.classList.remove('is-playing');
-        videoOverlay.classList.remove('is-hidden');
-        vcToggle.textContent = '▶';
-    }
-});
-
-video.addEventListener('timeupdate', () => {
-    if (video.duration) {
-        vcSeek.value = (video.currentTime / video.duration) * 100;
-        vcTime.textContent = `${fmt(video.currentTime)} / ${fmt(video.duration)}`;
-    }
-});
-
-vcSeek.addEventListener('input', () => {
-    if (video.duration) video.currentTime = (vcSeek.value / 100) * video.duration;
-});
-
-vcMute.addEventListener('click', () => {
-    video.muted = !video.muted;
-    vcMute.textContent = video.muted ? '🔇' : '🔊';
-});
-
-video.addEventListener('error', () => {
-    videoError.hidden = false;
-});
-
-video.addEventListener('loadeddata', () => {
-    videoError.hidden = true;
-});
-
-if (window.location.protocol === 'file:') {
-    videoError.hidden = false;
-}
 
 /* ═══ Lightbox صور ═══ */
 const lightbox = document.getElementById('lightbox');
@@ -286,57 +243,6 @@ document.getElementById('btn-spin').addEventListener('click', () => {
     }, 4200);
 });
 
-/* ═══ Memory game ═══ */
-function initMemory() {
-    const grid = document.getElementById('memory-grid');
-    const scoreEl = document.getElementById('memory-score');
-    const emojis = ['❤', '✨', '🌙', '🎁', '❤', '✨', '🌙', '🎁'];
-    let shuffled = [...emojis].sort(() => Math.random() - 0.5);
-    let flipped = [];
-    let matched = 0;
-    let tries = 0;
-    let lock = false;
-
-    grid.innerHTML = shuffled
-        .map((e, i) => `<button type="button" class="memory-card" data-i="${i}" data-e="${e}">?</button>`)
-        .join('');
-
-    grid.querySelectorAll('.memory-card').forEach((card) => {
-        card.addEventListener('click', () => {
-            if (lock || card.classList.contains('is-flipped') || card.classList.contains('is-matched')) return;
-
-            card.classList.add('is-flipped');
-            card.textContent = card.dataset.e;
-            flipped.push(card);
-
-            if (flipped.length === 2) {
-                lock = true;
-                tries++;
-                scoreEl.textContent = `محاولات: ${tries}`;
-
-                if (flipped[0].dataset.e === flipped[1].dataset.e) {
-                    flipped.forEach((c) => c.classList.add('is-matched'));
-                    matched += 2;
-                    flipped = [];
-                    lock = false;
-                    if (matched === emojis.length) {
-                        scoreEl.textContent = `🎉 كسبتِ! محاولات: ${tries}`;
-                    }
-                } else {
-                    setTimeout(() => {
-                        flipped.forEach((c) => {
-                            c.classList.remove('is-flipped');
-                            c.textContent = '?';
-                        });
-                        flipped = [];
-                        lock = false;
-                    }, 700);
-                }
-            }
-        });
-    });
-}
-
 /* ═══ Petals ═══ */
 function initPetals() {
     const canvas = document.getElementById('petals-canvas');
@@ -377,11 +283,16 @@ function initPetals() {
     })();
 }
 
-/* ═══ Final gift ═══ */
+/* ═══ عيدية — الرسالة تظهر بعد الضغط فقط ═══ */
 document.getElementById('btn-final-gift').addEventListener('click', function () {
     if (this.classList.contains('is-done')) return;
     this.classList.add('is-done');
-    document.getElementById('letter-secret').hidden = false;
+
+    const letter = document.getElementById('letter');
+    const hint = document.getElementById('gift-hint');
+    letter.hidden = false;
+    letter.classList.remove('letter--locked');
+    hint.textContent = 'عيدية محمود وصلتكِ ♥';
 
     const items = ['🐑', '❤', '✨', '🎉', '🌸', '💛', '🎁'];
     for (let i = 0; i < 55; i++) {
@@ -400,7 +311,8 @@ document.getElementById('btn-final-gift').addEventListener('click', function () 
         });
     }
 
-    gsap.from('#letter-secret', { scale: 0.8, opacity: 0, duration: 0.6, ease: 'back.out(2)' });
+    gsap.from(letter, { y: 40, opacity: 0, scale: 0.95, duration: 0.8, ease: 'power3.out' });
+    setTimeout(() => letter.scrollIntoView({ behavior: 'smooth', block: 'center' }), 300);
 });
 
 /* ═══ Loader & reveals ═══ */
@@ -427,5 +339,4 @@ window.addEventListener('load', () => {
 
     initPetals();
     initScratch();
-    initMemory();
 });
