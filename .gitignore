@@ -1,0 +1,8 @@
+# فيديو كبير — يتجاوز حد GitHub 100MB
+0424nnnnnnnnnnn.mp4
+*.mp4
+
+# نظام
+.DS_Store
+Thumbs.db
+node_modules/
