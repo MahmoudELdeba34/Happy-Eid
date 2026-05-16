@@ -2,194 +2,320 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
-    <meta name="theme-color" content="#faf6f0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#fff4e8">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <title>عيد أضحى ٢٠٢٦ ♥ روان</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 </head>
-<body>
-    <div class="bg-pattern" aria-hidden="true"></div>
-    <canvas id="petals-canvas" aria-hidden="true"></canvas>
+<body class="is-loading">
+    <a class="skip-link" href="#main">تخطي للمحتوى</a>
 
-    <div id="loader" class="loader">
-        <div class="loader-card">
-            <span class="loader-star">✦</span>
-            <p class="loader-year">عيد الأضحى ٢٠٢٦</p>
-            <h1 class="loader-title">محمود <span class="heart">♥</span> روان</h1>
-            <div class="loader-bar"><span class="loader-fill"></span></div>
-            <p class="loader-hint">مفاجأة بتتجهّز ليكِ...</p>
+    <div class="ambient" aria-hidden="true"></div>
+    <canvas class="ambient__canvas" id="petals-canvas" aria-hidden="true"></canvas>
+
+    <div class="loader" id="loader" role="status" aria-live="polite" aria-label="جاري التحميل">
+        <div class="loader__card">
+            <span class="loader__icon" aria-hidden="true">✦</span>
+            <p class="loader__badge">عيد الأضحى ٢٠٢٦</p>
+            <p class="loader__names">محمود <span>♥</span> روان</p>
+            <div class="loader__track"><span class="loader__bar" id="loader-bar"></span></div>
         </div>
     </div>
 
-    <aside class="mini-player" id="mini-player" aria-label="مشغّل الموسيقى">
-        <div class="mini-player__disc" aria-hidden="true"></div>
-        <div class="mini-player__info">
-            <span class="mini-player__label">الآن</span>
-            <p class="mini-player__title" id="now-playing">وأخيراً</p>
+    <header class="site-header" id="top">
+        <div class="wrap site-header__inner">
+            <a class="site-header__brand" href="#top">
+                <span class="site-header__emoji" aria-hidden="true">🐑</span>
+                <span class="site-header__text">عيد سعيد <strong>روان</strong></span>
+            </a>
+            <nav class="site-nav" aria-label="أقسام الصفحة">
+                <a href="#video">أغنيتنا</a>
+                <a href="#surprises">رسائل</a>
+                <a href="#extras">مفاجآت</a>
+                <a href="#gallery">صور</a>
+                <a href="#games">ألعاب</a>
+                <a href="#music">أغاني</a>
+                <a href="#gift">عيدية</a>
+            </nav>
         </div>
-        <div class="mini-player__btns">
-            <button type="button" id="btn-prev" class="mp-btn" aria-label="السابقة">⏮</button>
-            <button type="button" id="btn-play" class="mp-btn mp-btn--play" aria-label="تشغيل">▶</button>
-            <button type="button" id="btn-next" class="mp-btn" aria-label="التالية">⏭</button>
+    </header>
+
+    <aside class="player" id="mini-player" aria-label="مشغّل الموسيقى" hidden>
+        <span class="player__disc" aria-hidden="true"></span>
+        <div class="player__meta">
+            <span class="player__label">الآن</span>
+            <p class="player__title" id="now-playing">وأخيراً</p>
+        </div>
+        <div class="player__controls">
+            <button type="button" class="player__btn" id="btn-prev" aria-label="السابقة">⏮</button>
+            <button type="button" class="player__btn player__btn--main" id="btn-play" aria-label="تشغيل">▶</button>
+            <button type="button" class="player__btn" id="btn-next" aria-label="التالية">⏭</button>
         </div>
     </aside>
 
-    <main>
-        <section class="hero">
-            <div class="container">
-                <div class="hero__inner">
-                    <span class="pill">٢٠٢٦ · عيد أضحى مبارك 🐑</span>
-                    <h1 class="hero__title">عيد سعيد<br><em>روان</em> ♥</h1>
-                    <p class="hero__lead">مفاجأة من قلب محمود — اسحبي لتحت واستمتعي</p>
+    <main class="main" id="main">
+        <!-- Hero -->
+        <section class="panel panel--hero" aria-labelledby="hero-title">
+            <div class="wrap panel__body panel__body--center">
+                <span class="chip">٢٠٢٦ · عيد أضحى مبارك 🎉</span>
+                <h1 class="display" id="hero-title">كل عيد وأنتِ <em>عيدي</em> ♥</h1>
+                <p class="lede">مفاجأة من محمود — استمتعي بكل قسم تحت</p>
+            </div>
+        </section>
 
-                    <div class="yt-feature reveal">
-                        <p class="yt-feature__label">🎬 اضغطي تشغيل — أغنيتنا</p>
-                        <div class="yt-embed">
-                            <iframe
-                                src="https://www.youtube-nocookie.com/embed/GMihmMfeazY?rel=0"
-                                title="وأخيراً — محمود العسيلي"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                                allowfullscreen
-                                loading="lazy"
-                            ></iframe>
-                        </div>
-                        <a class="yt-open" href="https://www.youtube.com/watch?v=GMihmMfeazY" target="_blank" rel="noopener noreferrer">
-                            افتحي على يوتيوب ▶
-                        </a>
+        <!-- أغنيتنا — رسمة + يوتيوب -->
+        <section class="panel panel--video" id="video" aria-labelledby="video-title">
+            <div class="wrap">
+                <header class="panel__head">
+                    <span class="panel__tag">🎬 فيديونا</span>
+                    <h2 class="panel__title" id="video-title">وأخيراً — محمود العسيلي</h2>
+                </header>
+                <div class="video-card">
+                    <div class="video-art" role="img" aria-label="رسمة عيد — محمود وروان">
+                        <svg class="video-art__svg" viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <defs>
+                                <linearGradient id="art-sky" x1="0%" y1="0%" x2="0%" y2="100%">
+                                    <stop offset="0%" stop-color="#e8eaff"/>
+                                    <stop offset="50%" stop-color="#fce7f3"/>
+                                    <stop offset="100%" stop-color="#fff9db"/>
+                                </linearGradient>
+                                <linearGradient id="art-sun" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#ffd93d"/>
+                                    <stop offset="100%" stop-color="#ff6b81"/>
+                                </linearGradient>
+                            </defs>
+                            <rect width="640" height="360" fill="url(#art-sky)" rx="20"/>
+                            <circle cx="520" cy="70" r="45" fill="url(#art-sun)" opacity="0.9"/>
+                            <circle cx="520" cy="70" r="55" fill="#ffd93d" opacity="0.25"/>
+                            <path d="M80 280 Q160 220 240 280 T400 280 T560 280 L640 360 L0 360 Z" fill="#7bed9f" opacity="0.5"/>
+                            <path d="M0 300 Q120 260 200 300 T400 300 T640 300 L640 360 L0 360 Z" fill="#10b981" opacity="0.35"/>
+                            <text x="320" y="95" text-anchor="middle" font-size="28" font-weight="700" fill="#2d1f2e" font-family="Reem Kufi, sans-serif">وأخيراً ♥</text>
+                            <text x="320" y="125" text-anchor="middle" font-size="14" fill="#5c4a5e" font-family="Reem Kufi, sans-serif">محمود · روان · عيد ٢٠٢٦</text>
+                            <g transform="translate(200 155)">
+                                <ellipse cx="60" cy="95" rx="55" ry="12" fill="#2d1f2e" opacity="0.08"/>
+                                <circle cx="45" cy="50" r="28" fill="#ffedd5"/>
+                                <circle cx="75" cy="50" r="28" fill="#fce7f3"/>
+                                <path d="M30 78 Q45 95 60 78 L75 78 Q90 95 105 78 L105 130 Q60 145 30 130 Z" fill="#ff6b81"/>
+                                <path d="M75 78 Q90 95 105 78 L105 130 Q75 140 75 130 L75 78" fill="#a55eea"/>
+                                <path d="M30 78 Q45 95 60 78 L60 130 Q45 140 30 130 Z" fill="#ff85c0"/>
+                                <path d="M52 42 Q45 28 52 22 Q58 28 52 42" fill="#2d1f2e"/>
+                                <path d="M82 42 Q75 28 82 22 Q88 28 82 42" fill="#2d1f2e"/>
+                                <path d="M58 58 Q60 64 62 58" stroke="#2d1f2e" stroke-width="2" fill="none" stroke-linecap="round"/>
+                            </g>
+                            <text x="380" y="175" font-size="36">🐑</text>
+                            <text x="100" y="85" font-size="22" opacity="0.9">✨</text>
+                            <text x="480" y="225" font-size="20" opacity="0.85">🌙</text>
+                            <text x="150" y="225" font-size="18" opacity="0.8">💕</text>
+                            <text x="450" y="145" font-size="16" opacity="0.75">🎉</text>
+                            <path d="M280 200 Q320 170 360 200" stroke="#ff6b81" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.6"/>
+                            <circle cx="320" cy="188" r="8" fill="#ff6b81"/>
+                        </svg>
+                        <p class="video-art__caption">أغنيتنا — اضغطي الزر تحت وتشغّلي على يوتيوب 🎵</p>
                     </div>
+                    <a class="btn btn--coral btn--yt" href="https://www.youtube.com/watch?v=GMihmMfeazY" target="_blank" rel="noopener noreferrer">
+                        <span class="btn--yt__icon" aria-hidden="true">▶</span>
+                        شغّلي «وأخيراً» على يوتيوب
+                    </a>
                 </div>
             </div>
         </section>
 
-        <section class="section section--surprises">
-            <div class="container">
-                <header class="section__head reveal">
-                    <span class="section__tag">مفاجآت</span>
-                    <h2 class="section__title">رسائل محمود ليكِ</h2>
-                    <p class="section__sub">اضغطي على كل بطاقة 💌</p>
+        <!-- Surprises -->
+        <section class="panel panel--surprises" id="surprises" aria-labelledby="surprises-title">
+            <div class="wrap">
+                <header class="panel__head">
+                    <span class="panel__tag">💌 مفاجآت</span>
+                    <h2 class="panel__title" id="surprises-title">رسائل محمود ليكِ</h2>
+                    <p class="panel__desc">اضغطي على كل بطاقة</p>
                 </header>
-                <div class="surprise-grid" id="surprise-grid"></div>
+                <div class="grid grid--surprises" id="surprise-grid"></div>
             </div>
         </section>
 
-        <section class="section section--photos">
-            <div class="container">
-                <header class="section__head reveal">
-                    <span class="section__tag">ذكرياتنا</span>
-                    <h2 class="section__title">لحظاتنا الحلوة</h2>
-                    <p class="section__sub">اسحبي يمين وشمال — اضغطي للتكبير</p>
+        <!-- Extra surprises -->
+        <section class="panel panel--extras" id="extras" aria-labelledby="extras-title">
+            <div class="wrap">
+                <header class="panel__head">
+                    <span class="panel__tag">🎁 مفاجآت تانية</span>
+                    <h2 class="panel__title" id="extras-title">افتحي واكتشفي</h2>
+                    <p class="panel__desc">صناديق · أسئلة · مفاجآت سرية</p>
+                </header>
+
+                <div class="extras-block">
+                    <h3 class="extras-block__title">🎀 صناديق المفاجآت</h3>
+                    <p class="extras-block__hint">اضغطي على كل صندوق مرة واحدة</p>
+                    <div class="grid grid--boxes" id="mystery-boxes"></div>
+                </div>
+
+                <div class="extras-block">
+                    <h3 class="extras-block__title">💫 مفاجأة عشوائية</h3>
+                    <button type="button" class="btn btn--grape" id="btn-lucky">اضغطي وشوفي مفاجأة محمود ✨</button>
+                    <p class="lucky-result" id="lucky-result" aria-live="polite"></p>
+                </div>
+
+                <div class="extras-envelope" id="secret-envelope" hidden>
+                    <span class="extras-envelope__icon" aria-hidden="true">💌</span>
+                    <p class="extras-envelope__text" id="secret-envelope-text"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery -->
+        <section class="panel panel--gallery" id="gallery" aria-labelledby="gallery-title">
+            <div class="wrap">
+                <header class="panel__head">
+                    <span class="panel__tag">📸 ذكريات</span>
+                    <h2 class="panel__title" id="gallery-title">لحظاتنا الحلوة</h2>
+                    <p class="panel__desc">اسحبي للتصفح — اضغطي للتكبير</p>
                 </header>
             </div>
-            <div class="gallery-scroll" id="gallery-scroll">
-                <figure class="gallery-slide reveal" data-full="DM8A1683.jpg" data-caption="نظرة تختصر الكلام">
-                    <img src="DM8A1683.jpg" alt="روان ومحمود" loading="lazy">
+            <div class="gallery" id="gallery-scroll">
+                <figure class="gallery__item" data-full="DM8A1683.jpg" data-caption="نظرة تختصر الكلام">
+                    <img src="DM8A1683.jpg" alt="روان ومحمود" width="400" height="533" loading="lazy" decoding="async">
                     <figcaption>نظرة تختصر الكلام</figcaption>
                 </figure>
-                <figure class="gallery-slide reveal" data-full="DM8A1702.jpg" data-caption="بداية الأبد">
-                    <img src="DM8A1702.jpg" alt="روان ومحمود" loading="lazy">
+                <figure class="gallery__item" data-full="DM8A1702.jpg" data-caption="بداية الأبد">
+                    <img src="DM8A1702.jpg" alt="روان ومحمود" width="400" height="533" loading="lazy" decoding="async">
                     <figcaption>بداية الأبد</figcaption>
                 </figure>
-                <figure class="gallery-slide reveal" data-full="DM8A1768.jpg" data-caption="ضحكة من القلب">
-                    <img src="DM8A1768.jpg" alt="روان ومحمود" loading="lazy">
+                <figure class="gallery__item" data-full="DM8A1768.jpg" data-caption="ضحكة من القلب">
+                    <img src="DM8A1768.jpg" alt="روان ومحمود" width="400" height="533" loading="lazy" decoding="async">
                     <figcaption>ضحكة من القلب</figcaption>
                 </figure>
-                <figure class="gallery-slide reveal" data-full="K87A3244.jpg" data-caption="سند لا يميل">
-                    <img src="K87A3244.jpg" alt="روان ومحمود" loading="lazy">
+                <figure class="gallery__item" data-full="K87A3244.jpg" data-caption="سند لا يميل">
+                    <img src="K87A3244.jpg" alt="روان ومحمود" width="400" height="533" loading="lazy" decoding="async">
                     <figcaption>سند لا يميل</figcaption>
                 </figure>
-                <figure class="gallery-slide reveal" data-full="DM8A1696.jpg" data-caption="لحظة جميلة">
-                    <img src="DM8A1696.jpg" alt="روان ومحمود" loading="lazy">
+                <figure class="gallery__item" data-full="DM8A1696.jpg" data-caption="لحظة جميلة">
+                    <img src="DM8A1696.jpg" alt="روان ومحمود" width="400" height="533" loading="lazy" decoding="async">
                     <figcaption>لحظة جميلة</figcaption>
                 </figure>
+            </div>
         </section>
 
-        <section class="section section--play">
-            <div class="container">
-                <header class="section__head reveal">
-                    <span class="section__tag">العبى معايا</span>
-                    <h2 class="section__title">ألعاب العيد</h2>
+        <!-- Games -->
+        <section class="panel panel--games" id="games" aria-labelledby="games-title">
+            <div class="wrap">
+                <header class="panel__head">
+                    <span class="panel__tag">🎮 ألعاب</span>
+                    <h2 class="panel__title" id="games-title">العبى مع محمود</h2>
+                    <p class="panel__desc">٥ ألعاب — كل واحدة فيها رسالة حلوة</p>
                 </header>
-
-                <div class="game-card reveal">
-                    <h3 class="game-card__title">🎁 امسحي واكتشفي</h3>
-                    <p class="game-card__hint">امسحي بالإصبع على البطاقة</p>
-                    <div class="scratch-wrap">
-                        <p class="scratch-prize">روان، إنتِ أحلى مفاجأة في حياتي — محمود ♥</p>
-                        <canvas id="scratch-canvas" class="scratch-canvas"></canvas>
-                    </div>
-                </div>
-
-                <div class="game-card reveal">
-                    <h3 class="game-card__title">🎡 عجلة الحب</h3>
-                    <p class="game-card__hint">اضغطي لفّ — وشوفي رسالة محمود</p>
-                    <div class="wheel-wrap">
-                        <div class="wheel" id="wheel">
-                            <span class="wheel__label" style="--i:0">بحبك</span>
-                            <span class="wheel__label" style="--i:1">عيدك</span>
-                            <span class="wheel__label" style="--i:2">روحي</span>
-                            <span class="wheel__label" style="--i:3">حياتي</span>
-                            <span class="wheel__label" style="--i:4">أميرتي</span>
-                            <span class="wheel__label" style="--i:5">♥</span>
+                <div class="grid grid--games">
+                    <article class="card card--game">
+                        <h3 class="card__title">🎁 امسحي واكتشفي</h3>
+                        <p class="card__hint">امسحي بالإصبع على الذهب</p>
+                        <div class="scratch" id="scratch-root">
+                            <p class="scratch__prize">روان، إنتِ أحلى مفاجأة في حياتي — محمود ♥</p>
+                            <canvas id="scratch-canvas" class="scratch__canvas" aria-label="بطاقة خدش"></canvas>
                         </div>
-                        <div class="wheel-pointer">▼</div>
-                    </div>
-                    <button type="button" class="btn-game" id="btn-spin">لفّي العجلة</button>
-                    <p class="wheel-result" id="wheel-result"></p>
+                    </article>
+                    <article class="card card--game">
+                        <h3 class="card__title">🎡 عجلة الحب</h3>
+                        <p class="card__hint">لفّي وشوفي رسالة</p>
+                        <div class="wheel-box">
+                            <span class="wheel-box__pin" aria-hidden="true">▼</span>
+                            <div class="wheel" id="wheel" role="img" aria-label="عجلة الحب">
+                                <span class="wheel__slice" style="--i:0">بحبك</span>
+                                <span class="wheel__slice" style="--i:1">عيدك</span>
+                                <span class="wheel__slice" style="--i:2">روحي</span>
+                                <span class="wheel__slice" style="--i:3">حياتي</span>
+                                <span class="wheel__slice" style="--i:4">أميرتي</span>
+                                <span class="wheel__slice" style="--i:5">♥</span>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn--mint" id="btn-spin">لفّي العجلة</button>
+                        <p class="wheel-box__result" id="wheel-result" aria-live="polite"></p>
+                    </article>
+                    <article class="card card--game">
+                        <h3 class="card__title">🧠 اختبار الحب</h3>
+                        <p class="card__hint" id="quiz-progress">سؤال ١ من ٥</p>
+                        <div class="quiz" id="quiz-root">
+                            <p class="quiz__q" id="quiz-q"></p>
+                            <div class="quiz__opts" id="quiz-opts"></div>
+                        </div>
+                        <p class="quiz__result" id="quiz-result" aria-live="polite"></p>
+                    </article>
+                    <article class="card card--game">
+                        <h3 class="card__title">🃏 لعبة الذاكرة</h3>
+                        <p class="card__hint">اقلبي الكروت وطلّعي الأزواج — <span id="memory-moves">٠</span> محاولة</p>
+                        <div class="memory" id="memory-grid" role="grid" aria-label="لعبة الذاكرة"></div>
+                        <p class="memory__win" id="memory-win" hidden>يا سلام! طلّعتي كل الأزواج — محمود فخور بيكِ 🎉</p>
+                    </article>
+                    <article class="card card--game card--game-wide">
+                        <h3 class="card__title">💗 امسكي القلوب</h3>
+                        <p class="card__hint">اضغطي «ابدأ» وامسكي أكبر عدد قلوب في ١٥ ثانية</p>
+                        <div class="heart-game">
+                            <div class="heart-game__bar">
+                                <span class="heart-game__score">النقاط: <strong id="heart-score">٠</strong></span>
+                                <span class="heart-game__time" id="heart-time">١٥</span>
+                            </div>
+                            <div class="heart-game__arena" id="heart-arena" aria-label="منطقة اللعب"></div>
+                            <button type="button" class="btn btn--coral" id="btn-heart-start">ابدأ اللعبة</button>
+                            <p class="heart-game__msg" id="heart-msg" aria-live="polite"></p>
+                        </div>
+                    </article>
                 </div>
             </div>
         </section>
 
-        <section class="section section--music" id="music">
-            <div class="container">
-                <header class="section__head reveal">
-                    <span class="section__tag">🎵 ساوندتراك العيد</span>
-                    <h2 class="section__title">عمرو دياب وأغاني العيد</h2>
-                    <p class="section__sub">٨ أغاني لعمرو دياب + أغاني العيد — اضغطي وتفتحي يوتيوب</p>
+        <!-- Music -->
+        <section class="panel panel--music" id="music" aria-labelledby="music-title">
+            <div class="wrap">
+                <header class="panel__head">
+                    <span class="panel__tag">🎵 موسيقى</span>
+                    <h2 class="panel__title" id="music-title">عمرو دياب وأغاني العيد</h2>
+                    <p class="panel__desc">اضغطي على أي أغنية — تفتح يوتيوب</p>
                 </header>
                 <div class="tracks" id="tracks-root"></div>
             </div>
         </section>
 
-        <section class="section section--letter" id="letter-section">
-            <div class="container">
-                <header class="section__head reveal">
-                    <span class="section__tag">🐑 عيدية محمود</span>
-                    <h2 class="section__title">مفاجأة خاصة</h2>
-                    <p class="section__sub gift-hint" id="gift-hint">اضغطي على الخروف عشان تفتحي الرسالة</p>
+        <!-- Gift -->
+        <section class="panel panel--gift" id="gift" aria-labelledby="gift-title">
+            <div class="wrap wrap--narrow">
+                <header class="panel__head">
+                    <span class="panel__tag">🐑 عيدية</span>
+                    <h2 class="panel__title" id="gift-title">مفاجأة خاصة</h2>
+                    <p class="panel__desc panel__desc--accent" id="gift-hint">اضغطي على الخروف لفتح الرسالة</p>
                 </header>
-
-                <button type="button" class="btn-final-gift reveal" id="btn-final-gift">
-                    <span class="btn-final-gift__emoji">🐑</span>
-                    <span>اضغطي لاستلام العيدية</span>
+                <button type="button" class="gift-btn" id="btn-final-gift">
+                    <span class="gift-btn__icon" aria-hidden="true">🐑</span>
+                    <span class="gift-btn__text">استلام العيدية</span>
                 </button>
-
-                <article class="letter letter--locked" id="letter" hidden>
-                    <div class="letter__ribbon">♥</div>
-                    <p class="letter__hello">أغلى <strong>روان</strong> في الدنيا،</p>
+                <article class="letter" id="letter" hidden>
+                    <span class="letter__seal" aria-hidden="true">♥</span>
+                    <p class="letter__to">أغلى <strong>روان</strong> في الدنيا،</p>
                     <p>كل عيد وأنتِ أجمل حاجة حصلتلي. مش بس عيد أضحى — ده فرحة إنك في حياتي.</p>
                     <p>أنتِ خطيبتي وحبيبتي وكل حاجة حلوة في يومي. كل عام وأنتِ عيدي — وكل يوم وأنتِ حياتي.</p>
-                    <p class="letter__secret">سر صغير: أول ما شوفتكِ عرفت إن دي حكايتي ❤</p>
+                    <p class="letter__highlight">سر صغير: أول ما شوفتكِ عرفت إن دي حكايتي ❤</p>
                     <footer class="letter__foot">
-                        <span class="letter__sign">محمود</span>
-                        <span class="letter__date">عيد الأضحى ٢٠٢٦</span>
+                        <span class="letter__from">محمود</span>
+                        <time class="letter__when" datetime="2026">عيد الأضحى ٢٠٢٦</time>
                     </footer>
                 </article>
             </div>
         </section>
     </main>
 
-    <div class="lightbox" id="lightbox" hidden>
+    <footer class="site-footer">
+        <div class="wrap site-footer__inner">
+            <p>صُنع بحب · محمود ♥ روان · ٢٠٢٦</p>
+        </div>
+    </footer>
+
+    <dialog class="lightbox" id="lightbox" aria-label="عرض الصورة">
         <button type="button" class="lightbox__close" id="lightbox-close" aria-label="إغلاق">✕</button>
         <img class="lightbox__img" id="lightbox-img" src="" alt="">
         <p class="lightbox__cap" id="lightbox-cap"></p>
-    </div>
+    </dialog>
 
-    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+    <script src="script.js" defer></script>
 </body>
 </html>
